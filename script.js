@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // 1. Initialize 3D Visual Engine
   let threeScene = null;
   const canvasContainer = document.getElementById('oneopsCanvasContainer');
-  if (canvasContainer && typeof THREE !== 'undefined' && typeof OneOpsRoleScene !== 'undefined' && !matchMedia('(max-width: 1080px), (max-height: 720px), (prefers-reduced-motion: reduce)').matches) {
+  if (canvasContainer && typeof THREE !== 'undefined' && typeof OneOpsRoleScene !== 'undefined' && !matchMedia('(max-width: 1080px), (max-height: 499px), (prefers-reduced-motion: reduce)').matches) {
     try {
       threeScene = new OneOpsRoleScene('oneopsCanvasContainer');
       canvasContainer.classList.add('has-webgl');
@@ -99,7 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function getCurrentTheme() {
     return document.documentElement.getAttribute('data-theme') ||
            document.body.getAttribute('data-theme') ||
-           'dark';
+           'light';
   }
 
   function applyTheme(themeName) {
@@ -244,10 +244,9 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /**
-   * GSAP ScrollTrigger Pinned Sequence
+   * Native sticky pinned sequence (independent of external animation libraries)
    */
-  let masterScrollTrigger = null;
-  const compact = matchMedia('(max-width: 1080px), (max-height: 720px), (prefers-reduced-motion: reduce)');
+  const compact = matchMedia('(max-width: 1080px), (max-height: 499px), (prefers-reduced-motion: reduce)');
   let nativeScroll = false;
   function updateProgress(p) {
     const scene = p < .15 ? 0 : p < .38 ? 1 : p < .62 ? 2 : p < .85 ? 3 : 4;
@@ -260,19 +259,11 @@ document.addEventListener('DOMContentLoaded', () => {
     if (travel > 0) updateProgress(Math.min(1, Math.max(0, -rect.top / travel)));
   }
   function initScrollTrigger() {
-    if (masterScrollTrigger) { masterScrollTrigger.kill(true); masterScrollTrigger = null; }
     nativeScroll = false;
     wrapper.classList.remove('role-native-scroll', 'role-compact');
     if (compact.matches) {
       wrapper.classList.add('role-compact');
       if (currentActiveScene < 0) activateScene(0);
-    } else if (hasGsap) {
-      masterScrollTrigger = ScrollTrigger.create({
-        trigger: wrapper, start: 'top top', end: '+=4200', pin: section,
-        pinSpacing: true, anticipatePin: 1, scrub: 0.5,
-        onUpdate: self => updateProgress(self.progress)
-      });
-      updateProgress(masterScrollTrigger.progress || 0);
     } else {
       wrapper.classList.add('role-native-scroll');
       nativeScroll = true;
@@ -306,16 +297,7 @@ document.addEventListener('DOMContentLoaded', () => {
         window.scrollTo({ top: start + (wrapper.offsetHeight - section.offsetHeight) * targetProgress, behavior: 'smooth' });
         return;
       }
-      if (masterScrollTrigger) {
-        const startScroll = masterScrollTrigger.start;
-        const totalDistance = masterScrollTrigger.end - masterScrollTrigger.start;
-        const scrollToY = startScroll + totalDistance * targetProgress;
 
-        window.scrollTo({
-          top: scrollToY,
-          behavior: 'smooth'
-        });
-      }
     });
   });
 

@@ -78,13 +78,13 @@
   const themeToggleBtn = document.getElementById('themeToggleBtn');
 
   function initTheme() {
-    const savedTheme = storage.get('oneops-theme') === 'light' ? 'light' : 'dark';
+    const savedTheme = storage.get('oneops-theme') === 'dark' ? 'dark' : 'light';
     root.setAttribute('data-theme', savedTheme);
     themeToggleBtn?.setAttribute('aria-pressed', String(savedTheme === 'light'));
   }
 
   function toggleTheme() {
-    const currentTheme = root.getAttribute('data-theme') || 'dark';
+    const currentTheme = root.getAttribute('data-theme') || 'light';
     const nextTheme = currentTheme === 'dark' ? 'light' : 'dark';
     root.setAttribute('data-theme', nextTheme);
     storage.set('oneops-theme', nextTheme);
@@ -2067,14 +2067,15 @@
       const deck = document.getElementById('cardsStack');
       if (!deck) return;
       const cards = Array.from(deck.querySelectorAll('[data-card]'));
-      const desktop = window.matchMedia('(min-width: 1001px)');
+      const desktop = window.matchMedia('(min-width: 1001px) and (prefers-reduced-motion: no-preference)');
       let frame = 0;
       function measure() {
         frame = 0;
         const header = document.querySelector('.site-header');
         const navBottom = header ? header.getBoundingClientRect().bottom : 68;
         const top = Math.max(80, Math.ceil(navBottom + 12));
-        const strip = 12;
+        const strip = window.innerHeight <= 800 ? 6 : 12;
+        deck.style.setProperty('--cap-strip', `${strip}px`);
         deck.style.setProperty('--cap-top', `${top}px`);
         const fits = desktop.matches && cards.every((card, i) =>
           card.offsetHeight + top + i * strip + 12 <= window.innerHeight);

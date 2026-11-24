@@ -70,3 +70,9 @@ Role-Based Solutions refinements:
 - Verified all five native scroll stages in both themes at 1440x900, 1366x768 and 1280x721; mobile tabs checked at 390x844. External CDN scripts were unavailable in the test environment, so live WebGL/GSAP rendering requires online verification.
 
 Light hero fix: removed negative stage margins in light mode, added responsive column gutter, confined SVG art to stage, switched all SVG surfaces, labels, layer accents and particles to a light-mode palette. Existing dark palette and interactive renderer retained.
+
+Laptop sticky scrolling and initial theme update:
+- The Challenge deck now uses a compact, viewport-height-based layout on shorter laptop screens, retaining the stacked sticky cards when all five fit below the header. Mobile and exceptionally short layouts continue to scroll normally rather than clipping content.
+- Role-Based Solutions uses native CSS sticky pinning on desktop (including short laptop viewports). All five scroll stages and four role navigation controls remain available without GSAP pinning. WebGL effects still use the existing Three.js renderer when available.
+- First-time visits start in light mode. An explicitly selected theme is saved and restored on subsequent visits. An early theme check prevents a dark-mode flash.
+- Headless Chromium checks with external libraries blocked and local storage simulated: 1440x900, 1366x768, 1366x625, 1280x600, 1280x550 and 390x844. Desktop sticky position and all five role stages verified, plus default theme and toggle. Live CDN/WebGL rendering was not verified.
