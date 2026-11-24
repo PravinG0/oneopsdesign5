@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" fill="none">
+  <!-- Amazon Bedrock Foundation Model Control Plane -->
+  <rect width="64" height="64" rx="32" fill="#FFFFFF"/>
+  <g transform="translate(10, 10)">
+    <!-- Bedrock Isometric Cubes / Base Layer -->
+    <path d="M22 2L40 12V32L22 42L4 32V12L22 2Z" fill="#F2F4F8"/>
+    <!-- Top Rhombus -->
+    <path d="M22 4L38 13L22 22L6 13L22 4Z" fill="#00A4A6"/>
+    <!-- Left Face -->
+    <path d="M6 15L21 23.5V40L6 31.5V15Z" fill="#007E80"/>
+    <!-- Right Face -->
+    <path d="M23 23.5L38 15V31.5L23 40V23.5Z" fill="#005B5C"/>
+    <!-- Central Bedrock Core Pulse -->
+    <path d="M22 14L30 18.5V27.5L22 32L14 27.5V18.5L22 14Z" fill="#FF9900"/>
+    <path d="M22 16L28 19.5L22 23L16 19.5L22 16Z" fill="#FFB84D"/>
+  </g>
+</svg>

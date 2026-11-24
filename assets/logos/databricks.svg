@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" fill="none">
+  <!-- Databricks Lakehouse Platform -->
+  <rect width="64" height="64" rx="32" fill="#FFFFFF"/>
+  <g transform="translate(14, 15)">
+    <!-- Stacked Parallelograms in Red-Orange -->
+    <path d="M18 0L34 8.5L18 17L2 8.5L18 0Z" fill="#FF3621"/>
+    <path d="M18 9L34 17.5L18 26L2 17.5L18 9Z" fill="#FF3621" opacity="0.8"/>
+    <path d="M18 18L34 26.5L18 35L2 26.5L18 18Z" fill="#FF3621" opacity="0.6"/>
+  </g>
+</svg>

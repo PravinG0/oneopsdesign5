@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" fill="none">
+  <!-- AWS Organizations Multi-Account Governance -->
+  <rect width="64" height="64" rx="32" fill="#FFFFFF"/>
+  <g transform="translate(13, 14)">
+    <!-- Root Account Node -->
+    <rect x="13.5" y="1" width="11" height="9" rx="2" fill="#EC7211"/>
+    <!-- Tree Connectors -->
+    <path d="M19 10V18M7 18H31M7 18V26M19 18V26M31 18V26" stroke="#D13212" stroke-width="2.2" stroke-linecap="round"/>
+    <!-- Child OU Nodes -->
+    <rect x="2" y="26" width="10" height="8" rx="2" fill="#EC7211"/>
+    <rect x="14" y="26" width="10" height="8" rx="2" fill="#EC7211"/>
+    <rect x="26" y="26" width="10" height="8" rx="2" fill="#EC7211"/>
+    <!-- Hierarchy Nodes Inner Mark -->
+    <circle cx="19" cy="5.5" r="1.5" fill="#FFFFFF"/>
+    <circle cx="7" cy="30" r="1.2" fill="#FFFFFF"/>
+    <circle cx="19" cy="30" r="1.2" fill="#FFFFFF"/>
+    <circle cx="31" cy="30" r="1.2" fill="#FFFFFF"/>
+  </g>
+</svg>

@@ -1,0 +1,253 @@
+/* Final visual refinements: loaded after the original and enhanced sections. */
+:root {
+  --heading-accent: linear-gradient(98deg,#ff6557,#ff925f 55%,#ffba72);
+  --heading-fallback: #ff925f;
+  --font-main: 'Space Grotesk', sans-serif;
+  --font-mono: 'Space Grotesk', sans-serif;
+  --font-body: 'Space Grotesk', sans-serif;
+}
+[data-theme="light"] {
+  --heading-accent: linear-gradient(98deg,#a92524,#b63b20 55%,#995018);
+  --heading-fallback: #a92524;
+  --text-main: #20171d;
+  --text-body: #382d34;
+  --text-muted: #51424b;
+  --text-dim: #62525c;
+  --brand-coral-light: #a83125;
+}
+html, body, *, *::before, *::after {font-family:'Space Grotesk',sans-serif !important;}
+/* Consistent hero-style accents on all major headings; status colors remain semantic. */
+.heading-accent, .oh-title span, .oo-story .oo-title em,
+#problem .og-card-title .q-highlight, .programs-title .accent-word,
+.pillars-main-title em, .u-h3 em, .role-main-title [class^="title-gradient"],
+.final-cta-title .headline-gradient {
+  color:var(--heading-fallback) !important;
+  background:var(--heading-accent) !important;
+  -webkit-background-clip:text !important;
+  background-clip:text !important;
+  -webkit-text-fill-color:transparent !important;
+}
+#problem .og-card-title .q-highlight { --heading-accent:linear-gradient(98deg,#ff6557,#ff925f 55%,#ffba72); }
+/* The interactive comparison cards keep their dark glass surfaces in both modes. */
+#problem .og { color:#f7f3f1; }
+#problem .og-panel h3 { color:#f7f3f1; }
+#problem .og-panel h3 span { color:var(--accent); }
+#problem .og-panel .og-copy { color:#f1eff0; }
+@media (min-width:1001px) {
+  #problem .og-stage { max-width:1100px; grid-template-columns:minmax(0,1fr) clamp(52px,6vw,100px) minmax(0,1fr); }
+  #problem .og-panel { min-height:clamp(325px,40vh,410px); }
+  #problem .og-panel.risk .og-content {padding:56px 10% 57px 14%;}
+  #problem .og-panel.safe .og-content {padding:56px 14% 57px 10%;}
+}
+@media (min-width:681px) and (max-width:1000px) {
+  #problem .og-stage {max-width:780px;}
+  #problem .og-panel {min-height:330px;}
+}
+@media (max-width:680px) { #problem .og-panel { min-height:300px; } }
+/* Sliding nav pill: its text state follows the actual pill, not the current section. */
+[data-theme="light"] .links[data-links] .link {color:#33252d;}
+[data-theme="light"] .links[data-links] .link.is-active:not(.is-highlighted) {color:#94291f;background:#f2ded9;}
+[data-theme="light"] .links[data-links] .link.is-highlighted,
+[data-theme="light"] .links[data-links] .link:hover {color:#fff;background:#ad3025;}
+[data-theme="light"] .links__hl[data-hl] {background:#ad3025;opacity:1;}
+[data-theme="light"] .links[data-links] .link:focus-visible {outline:2px solid #95291f;outline-offset:2px;}
+@media(max-width:1140px) {
+  [data-theme="light"] .links[data-links] .link.is-active {color:#fff;background:#ad3025;}
+}
+/* Readable content at every stage of the scroll animation. */
+[data-theme="light"] .word, [data-theme="light"] .word-light {color:#51424b;opacity:1;}
+[data-theme="light"] .word.is-revealed, [data-theme="light"] .word-light.is-revealed {color:var(--text-main);}
+[data-theme="light"] .word-light.accent-word {opacity:1;}
+[data-theme="light"] .vignette-overlay {background:radial-gradient(circle at 50% 50%,transparent 40%,rgba(122,92,110,.12) 100%);}
+[data-theme="light"] :is(.section-label,.badge-text,.section-tag,.dial-kicker)[style] {color:#a83125 !important;}
+[data-theme="light"] .oo-story :is(.oo-step,.oo-bottom,.oo-sample) {color:#51424b;}
+[data-theme="light"] .oneops-role-section {--text-primary:#20171d;--text-secondary:#463741;}
+/* Enhanced hero light theme: light surfaces for both copy and interactive architecture. */
+[data-theme="light"] .oneops-hero {background:radial-gradient(ellipse at 80% 30%,#f4e6e3,transparent 55%),#f7f3f1;color:#20171d;}
+[data-theme="light"] .oneops-hero .oh-title,[data-theme="light"] .oneops-hero .oh-panel h2 {color:#20171d;}
+[data-theme="light"] .oneops-hero :is(.oh-eyebrow,.oh-desc,.oh-trust,.oh-scroll,.oh-live,.oh-stage-note) {color:#51424b;}
+[data-theme="light"] .oneops-hero .oh-tab {background:#fff;color:#382d34;border-color:#cbb9b9;}
+[data-theme="light"] .oneops-hero .oh-tab:is(:hover,[aria-pressed="true"]) {background:#f3e0da;color:#81271c;border-color:#a83125;}
+[data-theme="light"] .oneops-hero .oh-btn:not(.primary) {background:#fff;color:#382d34;border-color:#a58b87;}
+[data-theme="light"] .oneops-hero .oh-btn.primary {background:#ad3025;color:#fff;border-color:#ad3025;}
+[data-theme="light"] .oneops-hero .oh-stage {background:radial-gradient(ellipse at 42% 48%,#f6e4de 0%,#fbf5f2 53%,#fffdfb 100%);border-radius:24px;}
+[data-theme="light"] .oneops-hero .oh-stage-note {color:#51424b;}
+[data-theme="light"] .oneops-hero .oh-panel {background:#fff;border-color:#d4b4ad;box-shadow:0 12px 32px #3a2e3515;}
+[data-theme="light"] .oneops-hero .oh-panel p,[data-theme="light"] .oneops-hero .oh-panel .oh-metric-note {color:#51424b;}
+[data-theme="light"] .oneops-hero .oh-panel-kicker {color:#a83125;}
+[data-theme="light"] .oneops-hero .oh-spec-tabs button {color:#51424b;}
+[data-theme="light"] .oneops-hero .oh-spec-tabs button:is(:hover,[aria-pressed="true"]) {color:#8e291d;background:#f4e0da;}
+[data-theme="light"] .oneops-hero .oh-stat {background:#f8f2ef;border-color:#e0d2cc;}
+[data-theme="light"] .oneops-hero .oh-stat strong {color:#9b3024;}
+[data-theme="light"] .oneops-hero .oh-stat small {color:#51424b;}
+/* FAQ uses separate text/surface values because its original cream token served both. */
+[data-theme="light"] .oneops-faq {color-scheme:light;--bg:#f7f3f1;--panel:#fff;--cream:#20171d;--muted:#51424b;--line:#d3c3c6;--coral:#a83125;--plum:#7a5c6e;--ink:#3a2e35;}
+[data-theme="light"] .oneops-faq .ofaq-item.is-active {background:#fff5f1;}
+[data-theme="light"] .oneops-faq .orbit-node {background:#fff;border-color:#d3c3c6;color:#3a2e35;}
+[data-theme="light"] .oneops-faq .orbit-node.is-active {background:#ad3025;color:#fff;border-color:#ad3025;}
+[data-theme="light"] .oneops-faq .ofaq-node-label {color:#fff;}
+[data-theme="light"] .oneops-faq .wordmark svg path[fill="#F7F2F0"] {fill:#20171d;}
+@media (forced-colors:active) {
+  .heading-accent,.oh-title span,.oo-story .oo-title em,#problem .og-card-title .q-highlight,.programs-title .accent-word,.pillars-main-title em,.u-h3 em,.role-main-title [class^="title-gradient"],.final-cta-title .headline-gradient {background:none!important;color:CanvasText!important;-webkit-text-fill-color:CanvasText!important;}
+}
+
+/* Challenge heading: allow italic punctuation to extend beyond its advance width.
+   Inline gradient backgrounds otherwise clip the question mark's right edge. */
+#problem .og-card-title .q-highlight {
+  padding-inline: .06em .18em;
+  margin-inline-start: -.06em;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+/* Role-Based Solutions: brand palette and safe space below fixed navigation. */
+#solutions { --role-header-clearance: 94px; }
+#solutions .oneops-role-section {
+  background: radial-gradient(ellipse at 50% 48%, #432630 0%, #24191f 40%, #161114 77%);
+}
+[data-theme="light"] #solutions .oneops-role-section {
+  background: radial-gradient(ellipse at 50% 48%, #ebd6d6 0%, #f4e8e5 46%, #f7f3f1 78%);
+}
+#solutions .oneops-role-content {
+  padding-top: var(--role-header-clearance);
+  padding-bottom: 18px;
+  min-height: 0;
+}
+#solutions .role-header-stage { flex-shrink: 0; }
+#solutions .role-headline-container {
+  display: grid; grid-template-columns: minmax(0,1fr); align-items: start;
+  min-height: 0;
+}
+#solutions .role-headline-slide { position: relative; grid-area: 1 / 1; }
+#solutions .role-eyebrow-wrapper { margin-bottom: 10px; }
+#solutions .role-tag-pill { line-height: 1.35; }
+#solutions .role-diagram-stage { min-height: 190px; margin-block: 8px; }
+#solutions .stream-nodes-group { height: clamp(170px, 28vh, 240px); }
+#solutions .core-hud-display { transform: translateY(clamp(68px, 12vh, 120px)); }
+#solutions .role-capabilities-stage { display: grid; min-height: 0; flex-shrink: 0; }
+#solutions .capability-panel { grid-area: 1 / 1; position: relative; }
+#solutions .role-navigation-dock { flex-shrink: 0; }
+#solutions .core-hud-top { background: var(--bg-surface); }
+#solutions .core-hud-metric { color: var(--text-secondary); }
+#solutions .nav-active-pill { background: rgba(194,59,46,.16); }
+#solutions .role-nav-btn:focus-visible { outline: 2px solid var(--accent-teal); outline-offset: -2px; }
+#solutions .role-nav-btn.active .btn-label { color: var(--text-primary); }
+[data-theme="light"] #solutions .nav-active-pill { background: #f2ded9; }
+[data-theme="light"] #solutions .core-hud-top { background: #fff9f6; }
+[data-theme="light"] #solutions .diagram-node-pill { color: #20171d; }
+@media (min-width:1081px) and (max-height:800px) {
+  #solutions .role-main-title { font-size: clamp(24px, 2.2vw, 32px); }
+  #solutions .role-main-desc { font-size: 12.5px; }
+  #solutions .role-eyebrow-wrapper { margin-bottom: 6px; }
+  #solutions .cap-card { padding-block: 8px; }
+  #solutions .role-navigation-dock { margin-top: 8px; }
+}
+#solutions.role-compact .oneops-role-section { padding: 0 0 24px; }
+#solutions.role-compact .oneops-role-content { padding-top: var(--role-header-clearance); }
+#solutions.role-compact .role-diagram-stage { min-height: 260px; }
+#solutions.role-compact .core-hud-display { transform: none; }
+#solutions.role-compact .role-headline-slide.active, #solutions.role-compact .capability-panel.active { display: grid; }
+#solutions.role-compact .role-headline-slide.active { display: block; }
+#solutions.role-compact .nav-dock-track { margin-inline: auto; }
+/* Keep the existing fallback cube free of its baked-in rectangular background. */
+#solutions .role-core-fallback {
+  clip-path: polygon(50% 5.4%, 88.8% 27.6%, 88.8% 72.4%, 50% 94.6%, 11.2% 72.4%, 11.2% 27.6%);
+}
+
+/* Light hero: keep the grid tracks independent and reserve a true column gutter.
+   No negative margins or overflowing SVG artwork in the light layout. */
+[data-theme="light"] .oneops-hero .oh-main {
+  grid-template-columns:minmax(0,1fr) minmax(0,1.08fr);
+  gap:clamp(24px,3vw,48px);
+}
+[data-theme="light"] .oneops-hero .oh-copy {min-width:0;width:100%;}
+[data-theme="light"] .oneops-hero .oh-panel {width:100%;max-width:100%;}
+[data-theme="light"] .oneops-hero .oh-stage {
+  margin:0;width:100%;min-width:0;overflow:hidden;
+  border:1px solid #dfc9c2;
+  box-shadow:0 12px 32px #3a2e3510,inset 0 0 45px #ffffff9c;
+}
+[data-theme="light"] .oneops-hero .oh-scene {overflow:hidden;}
+[data-theme="light"] .oneops-hero .oh-stage-note {left:50%;bottom:8px;color:#51424b;max-width:95%;letter-spacing:.08em;}
+[data-theme="light"] .oneops-hero .oh-scene #oh-glow feGaussianBlur {std-deviation:2.5;}
+[data-theme="light"] .oneops-hero .oh-scene #oh-base stop:first-child {stop-color:#f6dec8;}
+[data-theme="light"] .oneops-hero .oh-scene #oh-base stop:last-child {stop-color:#fff6eb;}
+[data-theme="light"] .oneops-hero .oh-scene #oh-core stop:first-child {stop-color:#b6442c;}
+[data-theme="light"] .oneops-hero .oh-scene #oh-core stop:nth-child(2) {stop-color:#da8a64;}
+[data-theme="light"] .oneops-hero .oh-scene #oh-core stop:last-child {stop-color:#e6b4a4;}
+[data-theme="light"] .oneops-hero .oh-scene .oh-call-bg {fill-opacity:.98;}
+[data-theme="light"] .oneops-hero .oh-layer:focus-visible .oh-face,
+[data-theme="light"] .oneops-hero .oh-callout:focus-visible rect {stroke:#3a2e35!important;}
+[data-theme="light"] .oneops-hero .oh-horizon.blue {border-color:#7a5c6e44;box-shadow:0 0 24px #7a5c6e16;}
+@media (min-width:781px) and (max-width:1100px) {
+  [data-theme="light"] .oneops-hero .oh-main {grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px;}
+}
+@media (max-width:780px) {
+  [data-theme="light"] .oneops-hero .oh-main {gap:24px;}
+  [data-theme="light"] .oneops-hero .oh-stage {max-width:650px;width:100%;}
+}
+/* SVG presentation attributes are set by the existing renderer on every frame.
+   CSS overrides apply immediately on theme switch without resetting animation state. */
+[data-theme="light"] .oneops-hero .oh-scene [fill="#111824"] {fill:#fffdfb;}
+[data-theme="light"] .oneops-hero .oh-scene [stroke="#111824"] {stroke:#fffdfb;}
+[data-theme="light"] .oneops-hero .oh-scene [fill="#251e29"] {fill:#f4e3df;}
+[data-theme="light"] .oneops-hero .oh-scene [stroke="#251e29"] {stroke:#f4e3df;}
+[data-theme="light"] .oneops-hero .oh-scene [fill="#152235"] {fill:#fffaf6;}
+[data-theme="light"] .oneops-hero .oh-scene [stroke="#152235"] {stroke:#fffaf6;}
+[data-theme="light"] .oneops-hero .oh-scene [fill="#f5f6ff"] {fill:#33252d;}
+[data-theme="light"] .oneops-hero .oh-scene [stroke="#f5f6ff"] {stroke:#33252d;}
+[data-theme="light"] .oneops-hero .oh-scene [fill="#f6f4fa"] {fill:#33252d;}
+[data-theme="light"] .oneops-hero .oh-scene [stroke="#f6f4fa"] {stroke:#33252d;}
+[data-theme="light"] .oneops-hero .oh-scene [fill="#9cabc4"] {fill:#6c4e41;}
+[data-theme="light"] .oneops-hero .oh-scene [stroke="#9cabc4"] {stroke:#6c4e41;}
+[data-theme="light"] .oneops-hero .oh-scene [fill="#a7aec0"] {fill:#5e4f58;}
+[data-theme="light"] .oneops-hero .oh-scene [stroke="#a7aec0"] {stroke:#5e4f58;}
+[data-theme="light"] .oneops-hero .oh-scene [fill="#9db7d6"] {fill:#51424b;}
+[data-theme="light"] .oneops-hero .oh-scene [stroke="#9db7d6"] {stroke:#51424b;}
+[data-theme="light"] .oneops-hero .oh-scene [fill="#ff644d"] {fill:#b73128;}
+[data-theme="light"] .oneops-hero .oh-scene [stroke="#ff644d"] {stroke:#b73128;}
+[data-theme="light"] .oneops-hero .oh-scene [fill="#a29aff"] {fill:#73518c;}
+[data-theme="light"] .oneops-hero .oh-scene [stroke="#a29aff"] {stroke:#73518c;}
+[data-theme="light"] .oneops-hero .oh-scene [fill="#48caff"] {fill:#28758e;}
+[data-theme="light"] .oneops-hero .oh-scene [stroke="#48caff"] {stroke:#28758e;}
+[data-theme="light"] .oneops-hero .oh-scene [fill="#ff905c"] {fill:#b4512d;}
+[data-theme="light"] .oneops-hero .oh-scene [stroke="#ff905c"] {stroke:#b4512d;}
+[data-theme="light"] .oneops-hero .oh-scene [fill="#ffac58"] {fill:#a75c16;}
+[data-theme="light"] .oneops-hero .oh-scene [stroke="#ffac58"] {stroke:#a75c16;}
+[data-theme="light"] .oneops-hero .oh-scene [fill="#62baff"] {fill:#6c879c;}
+[data-theme="light"] .oneops-hero .oh-scene [stroke="#62baff"] {stroke:#6c879c;}
+[data-theme="light"] .oneops-hero .oh-scene [fill="#64b9ff"] {fill:#547f9a;}
+[data-theme="light"] .oneops-hero .oh-scene [stroke="#64b9ff"] {stroke:#547f9a;}
+[data-theme="light"] .oneops-hero .oh-scene [fill="#657f9c"] {fill:#8b7f87;}
+[data-theme="light"] .oneops-hero .oh-scene [stroke="#657f9c"] {stroke:#8b7f87;}
+[data-theme="light"] .oneops-hero .oh-scene [fill="#668bbc"] {fill:#ad9ca3;}
+[data-theme="light"] .oneops-hero .oh-scene [stroke="#668bbc"] {stroke:#ad9ca3;}
+[data-theme="light"] .oneops-hero .oh-scene [fill="#8cdaff"] {fill:#477e9d;}
+[data-theme="light"] .oneops-hero .oh-scene [stroke="#8cdaff"] {stroke:#477e9d;}
+[data-theme="light"] .oneops-hero .oh-scene [fill="#90aaff"] {fill:#7a7899;}
+[data-theme="light"] .oneops-hero .oh-scene [stroke="#90aaff"] {stroke:#7a7899;}
+[data-theme="light"] .oneops-hero .oh-scene [fill="#ff865b"] {fill:#b85538;}
+[data-theme="light"] .oneops-hero .oh-scene [stroke="#ff865b"] {stroke:#b85538;}
+[data-theme="light"] .oneops-hero .oh-scene [fill="#ff8757"] {fill:#b85538;}
+[data-theme="light"] .oneops-hero .oh-scene [stroke="#ff8757"] {stroke:#b85538;}
+[data-theme="light"] .oneops-hero .oh-scene [fill="#ffc66e"] {fill:#a75c16;}
+[data-theme="light"] .oneops-hero .oh-scene [stroke="#ffc66e"] {stroke:#a75c16;}
+[data-theme="light"] .oneops-hero .oh-scene [fill="#ff956a"] {fill:#b85538;}
+[data-theme="light"] .oneops-hero .oh-scene [stroke="#ff956a"] {stroke:#b85538;}
+[data-theme="light"] .oneops-hero .oh-scene [fill="#ff9774"] {fill:#b66a57;}
+[data-theme="light"] .oneops-hero .oh-scene [stroke="#ff9774"] {stroke:#b66a57;}
+[data-theme="light"] .oneops-hero .oh-scene [fill="#ffb786"] {fill:#b9744c;}
+[data-theme="light"] .oneops-hero .oh-scene [stroke="#ffb786"] {stroke:#b9744c;}
+[data-theme="light"] .oneops-hero .oh-scene [fill="#ffc59b"] {fill:#b9744c;}
+[data-theme="light"] .oneops-hero .oh-scene [stroke="#ffc59b"] {stroke:#b9744c;}
+[data-theme="light"] .oneops-hero .oh-scene [fill="#ffddaf"] {fill:#b66a38;}
+[data-theme="light"] .oneops-hero .oh-scene [stroke="#ffddaf"] {stroke:#b66a38;}
+[data-theme="light"] .oneops-hero .oh-scene [fill="#fff0dc"] {fill:#a83e28;}
+[data-theme="light"] .oneops-hero .oh-scene [stroke="#fff0dc"] {stroke:#a83e28;}
+[data-theme="light"] .oneops-hero .oh-scene [fill="#ffd4ca"] {fill:#a2524c;}
+[data-theme="light"] .oneops-hero .oh-scene [stroke="#ffd4ca"] {stroke:#a2524c;}
+[data-theme="light"] .oneops-hero .oh-scene [fill="#ff5c32"] {fill:#dc9a88;}
+[data-theme="light"] .oneops-hero .oh-scene [stroke="#ff5c32"] {stroke:#dc9a88;}
+[data-theme="light"] .oneops-hero .oh-scene .oh-callout text {font-weight:500;}
+[data-theme="light"] .oneops-hero .oh-scene .oh-callout text:first-of-type {font-weight:700;}
+[data-theme="light"] .oneops-hero .oh-scene .oh-callout[aria-pressed="true"] .oh-call-bg {fill:#f4e3df;}

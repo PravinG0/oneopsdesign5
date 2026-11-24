@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" fill="none">
+  <!-- Mistral AI Cascade Blocks -->
+  <rect width="64" height="64" rx="32" fill="#FFFFFF"/>
+  <g transform="translate(13, 14)">
+    <!-- Top Bar -->
+    <rect x="0" y="0" width="7" height="6" fill="#000000"/>
+    <rect x="31" y="0" width="7" height="6" fill="#000000"/>
+    <!-- Row 2 -->
+    <rect x="0" y="7.5" width="14" height="6" fill="#FA520F"/>
+    <rect x="24" y="7.5" width="14" height="6" fill="#FA520F"/>
+    <!-- Row 3 -->
+    <rect x="0" y="15" width="38" height="6" fill="#FF7000"/>
+    <!-- Row 4 -->
+    <rect x="0" y="22.5" width="7" height="6" fill="#F3A000"/>
+    <rect x="15.5" y="22.5" width="7" height="6" fill="#F3A000"/>
+    <rect x="31" y="22.5" width="7" height="6" fill="#F3A000"/>
+    <!-- Row 5 -->
+    <rect x="0" y="30" width="7" height="6" fill="#FFD000"/>
+    <rect x="31" y="30" width="7" height="6" fill="#FFD000"/>
+  </g>
+</svg>

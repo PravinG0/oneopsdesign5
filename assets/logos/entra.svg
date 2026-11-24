@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" fill="none">
+  <!-- Microsoft Entra ID (Azure AD) -->
+  <rect width="64" height="64" rx="32" fill="#FFFFFF"/>
+  <g transform="translate(14, 13)">
+    <!-- Entra Identity Shield / Facets -->
+    <path d="M18 1L3 8.5V21C3 30.5 9.5 37 18 39.5C26.5 37 33 30.5 33 21V8.5L18 1Z" fill="#0078D4"/>
+    <!-- Cyan Facet -->
+    <path d="M18 1L33 8.5V21C33 30.5 26.5 37 18 39.5V20L18 1Z" fill="#002050" opacity="0.25"/>
+    <path d="M18 6L7 12V21C7 27.5 11.5 32 18 34C24.5 32 29 27.5 29 21V12L18 6Z" fill="#50E6FF" opacity="0.9"/>
+    <path d="M18 10L11 14.5V21C11 25.5 14 28.5 18 30C22 28.5 25 25.5 25 21V14.5L18 10Z" fill="#0078D4"/>
+    <circle cx="18" cy="18" r="3" fill="#FFFFFF"/>
+    <path d="M18 21V26M15 24H21" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round"/>
+  </g>
+</svg>

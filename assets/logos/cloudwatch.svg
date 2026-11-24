@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" fill="none">
+  <!-- Amazon CloudWatch Telemetry -->
+  <rect width="64" height="64" rx="32" fill="#FFFFFF"/>
+  <g transform="translate(13, 13)">
+    <!-- Outer Dial / Gauge Track -->
+    <path d="M19 3C10.2 3 3 10.2 3 19C3 27.8 10.2 35 19 35C27.8 35 35 27.8 35 19C35 10.2 27.8 3 19 3Z" stroke="#E7157B" stroke-width="3" stroke-dasharray="3 2" fill="#FFF0F6"/>
+    <!-- Metric Telemetry Bars -->
+    <rect x="9" y="20" width="3.5" height="8" rx="1.5" fill="#E7157B"/>
+    <rect x="14.5" y="15" width="3.5" height="13" rx="1.5" fill="#E7157B"/>
+    <rect x="20" y="11" width="3.5" height="17" rx="1.5" fill="#E7157B"/>
+    <rect x="25.5" y="17" width="3.5" height="11" rx="1.5" fill="#E7157B"/>
+    <!-- Needle / Pointer -->
+    <circle cx="19" cy="19" r="2.5" fill="#FF4F8B"/>
+  </g>
+</svg>

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" fill="none">
+  <!-- PostgreSQL / pgvector Database -->
+  <rect width="64" height="64" rx="32" fill="#FFFFFF"/>
+  <g transform="translate(13, 11)">
+    <!-- PostgreSQL Elephant Emblem (Slonik Profile) -->
+    <path d="M19 2C10.7 2 4 8.7 4 17C4 20.2 5 23.2 6.8 25.6L5.5 32.5C5.3 33.5 6.2 34.3 7.1 33.9L12.5 31.6C14.4 32.5 16.6 33 19 33C27.3 33 34 26.3 34 18C34 9.7 27.3 2 19 2Z" fill="#336791"/>
+    <!-- Tusks & Features -->
+    <path d="M15 15C15 12.8 16.8 11 19 11C21.2 11 23 12.8 23 15C23 17.2 21.2 19 19 19C16.8 19 15 17.2 15 15Z" fill="#FFFFFF"/>
+    <circle cx="19" cy="15" r="2.2" fill="#336791"/>
+    <path d="M11 20C11 23.5 13.5 26.5 17 27V30C12 29.5 8 25.5 8 20.5H11Z" fill="#FFFFFF"/>
+    <path d="M22 25C25 24 28 21.5 28 17.5H30.5C30.5 23 26 26.5 22 27.5V25Z" fill="#FFFFFF"/>
+  </g>
+</svg>

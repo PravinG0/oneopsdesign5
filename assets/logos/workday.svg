@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" fill="none">
+  <!-- Workday Enterprise HCM -->
+  <rect width="64" height="64" rx="32" fill="#FFFFFF"/>
+  <g transform="translate(12, 17)">
+    <!-- Workday Arch / Sunburst Arc -->
+    <path d="M7 21C7 11.6 12.8 4 20 4C27.2 4 33 11.6 33 21" stroke="#E26829" stroke-width="5" stroke-linecap="round"/>
+    <circle cx="20" cy="18" r="4.5" fill="#005187"/>
+    <path d="M12 25H28" stroke="#005187" stroke-width="3" stroke-linecap="round"/>
+  </g>
+</svg>

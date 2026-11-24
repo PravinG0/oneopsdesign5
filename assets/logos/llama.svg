@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" fill="none">
+  <!-- Meta Llama Infinity Mark -->
+  <rect width="64" height="64" rx="32" fill="#FFFFFF"/>
+  <g transform="translate(11, 17)">
+    <defs>
+      <linearGradient id="metaGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#0064E0"/>
+        <stop offset="50%" stop-color="#0081FB"/>
+        <stop offset="100%" stop-color="#00C4FF"/>
+      </linearGradient>
+    </defs>
+    <!-- Infinity loop contour -->
+    <path d="M41.7 4.5C39.4 1.6 35.8 0 32.1 0C27.9 0 24.1 2.1 21 5.8C17.9 2.1 14.1 0 9.9 0C6.2 0 2.6 1.6 0.3 4.5C-0.8 6 0.4 8.2 2.2 8.2C5.3 8.2 8.3 9.8 10.3 12.3C12.9 15.6 16.1 21.6 21 28.5C25.9 21.6 29.1 15.6 31.7 12.3C33.7 9.8 36.7 8.2 39.8 8.2C41.6 8.2 42.8 6 41.7 4.5Z" fill="url(#metaGrad)"/>
+    <path d="M21 28.5C18.2 24.4 14.8 19.3 12.3 15.9C9.7 12.3 5.9 10.2 1.8 10.2C0.6 10.2 -0.2 11.2 0.05 12.4C1.3 19.8 6.5 27 13.5 29.5C16.8 30.7 20 29.8 21 28.5Z" fill="#0064E0"/>
+    <path d="M21 28.5C23.8 24.4 27.2 19.3 29.7 15.9C32.3 12.3 36.1 10.2 40.2 10.2C41.4 10.2 42.2 11.2 41.95 12.4C40.7 19.8 35.5 27 28.5 29.5C25.2 30.7 22 29.8 21 28.5Z" fill="#0081FB"/>
+  </g>
+</svg>

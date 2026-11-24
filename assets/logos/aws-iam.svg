@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" fill="none">
+  <!-- AWS IAM (Identity and Access Management) -->
+  <rect width="64" height="64" rx="32" fill="#FFFFFF"/>
+  <g transform="translate(14, 12)">
+    <!-- IAM Red Shield / Key Profile -->
+    <path d="M18 1L3 6.5V20C3 29.5 9.5 37 18 39.5C26.5 37 33 29.5 33 20V6.5L18 1Z" fill="#DD344C"/>
+    <!-- Central Key Element -->
+    <circle cx="18" cy="14" r="5" fill="#FFFFFF"/>
+    <circle cx="18" cy="14" r="2.5" fill="#DD344C"/>
+    <path d="M18 19V30M18 24H23M18 28H21" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round"/>
+  </g>
+</svg>

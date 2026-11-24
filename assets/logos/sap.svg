@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" fill="none">
+  <!-- SAP Enterprise ERP & FinOps -->
+  <rect width="64" height="64" rx="32" fill="#FFFFFF"/>
+  <g transform="translate(10, 19)">
+    <!-- SAP Blue Trapezoid -->
+    <path d="M0 0H44L34 26H0V0Z" fill="#008FD3"/>
+    <!-- Letters SAP -->
+    <text x="5" y="19" font-family="'Space Grotesk', -apple-system, sans-serif" font-size="16" font-weight="800" fill="#FFFFFF" letter-spacing="-0.5px">SAP</text>
+  </g>
+</svg>

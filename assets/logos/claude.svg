@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" fill="none">
+  <!-- Anthropic Claude Spark / Asterisk Mark -->
+  <rect width="64" height="64" rx="32" fill="#FFFFFF"/>
+  <g transform="translate(12, 12)">
+    <!-- 8-Pointed Claude Starburst -->
+    <path d="M20 0C19.2 8.5 16.5 14 12 17.5C14 12 11.5 6.5 7 3.5C8 9 6.5 14.5 2 17C7.5 18 13 18.5 17 21C11.5 22.5 6 25 1 29.5C7 28.5 13 29.5 17.5 33C14 36 10 40 4 40C11.5 38.5 17 35.5 20 31C21.5 37 25 39 31 40C27.5 35 27 30 25.5 24C30.5 25 36 24 40 21C34.5 19 29.5 18 24 18C28 15 33 11 37 6C31 9 26 12 22 17C23 11 23 5 20 0Z" fill="#CC785C"/>
+  </g>
+</svg>

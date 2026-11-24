@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" fill="none">
+  <!-- HashiCorp Terraform -->
+  <rect width="64" height="64" rx="32" fill="#FFFFFF"/>
+  <g transform="translate(13, 11)">
+    <!-- Terraform Isometric Parallelograms -->
+    <!-- Top Block -->
+    <path d="M12.5 13.5L25 6.2L25 20.8L12.5 28.1V13.5Z" fill="#5C4EE5"/>
+    <!-- Left Block -->
+    <path d="M0 6.2L12.5 13.5V28.1L0 20.8V6.2Z" fill="#844FBA"/>
+    <!-- Right Block -->
+    <path d="M25 6.2L37.5 13.5V28.1L25 20.8V6.2Z" fill="#844FBA"/>
+    <!-- Bottom Block -->
+    <path d="M12.5 29.5L25 22.2V36.8L12.5 44.1V29.5Z" fill="#5C4EE5"/>
+  </g>
+</svg>

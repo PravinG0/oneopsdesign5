@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" fill="none">
+  <!-- Google Drive Enterprise Knowledge Base -->
+  <rect width="64" height="64" rx="32" fill="#FFFFFF"/>
+  <g transform="translate(14, 16)">
+    <!-- Yellow top/right band -->
+    <path d="M23.5 0H12.5L24.5 21H35.5L23.5 0Z" fill="#FFC107"/>
+    <!-- Blue left band -->
+    <path d="M12.5 0L0 21.5L6 32L18.5 10.5L12.5 0Z" fill="#0066DA"/>
+    <!-- Green bottom band -->
+    <path d="M0 21.5L6 32H30L36 21.5H0Z" fill="#00AC47"/>
+  </g>
+</svg>
