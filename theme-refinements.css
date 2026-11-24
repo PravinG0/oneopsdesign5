@@ -70,7 +70,7 @@ html, body, *, *::before, *::after {font-family:'Space Grotesk',sans-serif !impo
 [data-theme="light"] .oneops-hero .oh-tab:is(:hover,[aria-pressed="true"]) {background:#f3e0da;color:#81271c;border-color:#a83125;}
 [data-theme="light"] .oneops-hero .oh-btn:not(.primary) {background:#fff;color:#382d34;border-color:#a58b87;}
 [data-theme="light"] .oneops-hero .oh-btn.primary {background:#ad3025;color:#fff;border-color:#ad3025;}
-[data-theme="light"] .oneops-hero .oh-stage {background:radial-gradient(ellipse at 42% 48%,#f6e4de 0%,#fbf5f2 53%,#fffdfb 100%);border-radius:24px;}
+[data-theme="light"] .oneops-hero .oh-stage {background:transparent;border-radius:0;}
 [data-theme="light"] .oneops-hero .oh-stage-note {color:#51424b;}
 [data-theme="light"] .oneops-hero .oh-panel {background:#fff;border-color:#d4b4ad;box-shadow:0 12px 32px #3a2e3515;}
 [data-theme="light"] .oneops-hero .oh-panel p,[data-theme="light"] .oneops-hero .oh-panel .oh-metric-note {color:#51424b;}
@@ -154,21 +154,26 @@ html, body, *, *::before, *::after {font-family:'Space Grotesk',sans-serif !impo
   clip-path: polygon(50% 5.4%, 88.8% 27.6%, 88.8% 72.4%, 50% 94.6%, 11.2% 72.4%, 11.2% 27.6%);
 }
 
-/* Light hero: keep the grid tracks independent and reserve a true column gutter.
-   No negative margins or overflowing SVG artwork in the light layout. */
-[data-theme="light"] .oneops-hero .oh-main {
+/* Shared hero geometry: identical SVG scale in both themes, with a safe
+   column gutter. Extend the artwork toward the outer page margin only. */
+.oneops-hero .oh-main {
   grid-template-columns:minmax(0,1fr) minmax(0,1.08fr);
-  gap:clamp(24px,3vw,48px);
+  gap:16px;
 }
-[data-theme="light"] .oneops-hero .oh-copy {min-width:0;width:100%;}
-[data-theme="light"] .oneops-hero .oh-panel {width:100%;max-width:100%;}
-[data-theme="light"] .oneops-hero .oh-stage {
-  margin:0;width:100%;min-width:0;overflow:hidden;
-  border:1px solid #dfc9c2;
-  box-shadow:0 12px 32px #3a2e3510,inset 0 0 45px #ffffff9c;
+.oneops-hero .oh-copy {min-width:0;width:100%;}
+.oneops-hero .oh-panel {width:100%;max-width:100%;}
+.oneops-hero .oh-stage {
+  margin:0 -6% 0 0;
+  width:auto;
+  min-width:0;
+  overflow:visible;
+  border:0;
+  border-radius:0;
+  box-shadow:none;
+  background:transparent;
 }
-[data-theme="light"] .oneops-hero .oh-scene {overflow:hidden;}
-[data-theme="light"] .oneops-hero .oh-stage-note {left:50%;bottom:8px;color:#51424b;max-width:95%;letter-spacing:.08em;}
+.oneops-hero .oh-scene {overflow:visible;}
+[data-theme="light"] .oneops-hero .oh-stage-note {color:#51424b;}
 [data-theme="light"] .oneops-hero .oh-scene #oh-glow feGaussianBlur {std-deviation:2.5;}
 [data-theme="light"] .oneops-hero .oh-scene #oh-base stop:first-child {stop-color:#f6dec8;}
 [data-theme="light"] .oneops-hero .oh-scene #oh-base stop:last-child {stop-color:#fff6eb;}
@@ -180,11 +185,12 @@ html, body, *, *::before, *::after {font-family:'Space Grotesk',sans-serif !impo
 [data-theme="light"] .oneops-hero .oh-callout:focus-visible rect {stroke:#3a2e35!important;}
 [data-theme="light"] .oneops-hero .oh-horizon.blue {border-color:#7a5c6e44;box-shadow:0 0 24px #7a5c6e16;}
 @media (min-width:781px) and (max-width:1100px) {
-  [data-theme="light"] .oneops-hero .oh-main {grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px;}
+   .oneops-hero .oh-main {grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;}
+  .oneops-hero .oh-stage {margin:0 -4% 0 0;}
 }
 @media (max-width:780px) {
-  [data-theme="light"] .oneops-hero .oh-main {gap:24px;}
-  [data-theme="light"] .oneops-hero .oh-stage {max-width:650px;width:100%;}
+   .oneops-hero .oh-main {gap:12px;}
+   .oneops-hero .oh-stage {margin:0;max-width:650px;width:100%;}
 }
 /* SVG presentation attributes are set by the existing renderer on every frame.
    CSS overrides apply immediately on theme switch without resetting animation state. */
