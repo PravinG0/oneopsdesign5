@@ -930,91 +930,21 @@
       ctx.lineWidth = 1.3;
       ctx.strokeStyle = isLight ? 'rgba(58, 46, 53, 0.22)' : 'rgba(255, 255, 255, 0.38)';
       ctx.shadowColor = isLight ? 'rgba(194, 59, 46, 0.15)' : 'rgba(194, 59, 46, 0.35)';
-      ctx.shadowBlur = 4;
+      ctx.shadowBlur = 0;
       ctx.stroke();
       ctx.restore();
     }
 
+    // Single, hairline moving brand accent, exactly the base ring width.
     function drawGlassySegment(cx, cy, radius, centerAngle, arcLength) {
-      const isLight = document.documentElement.getAttribute('data-theme') === 'light';
-      const startAngle = centerAngle - arcLength * 0.5;
-      const endAngle = centerAngle + arcLength * 0.5;
-
-      // 1. Soft diffused outer bloom / ambient glass dispersion
+      const light = document.documentElement.dataset.theme === 'light';
       ctx.save();
       ctx.beginPath();
-      ctx.arc(cx, cy, radius, startAngle, endAngle);
-      ctx.lineWidth = 6.5;
+      ctx.arc(cx, cy, radius, centerAngle - arcLength / 2, centerAngle + arcLength / 2);
+      ctx.lineWidth = 1.3;
       ctx.lineCap = 'round';
-      ctx.strokeStyle = isLight ? 'rgba(194, 59, 46, 0.22)' : 'rgba(224, 112, 99, 0.28)';
-      ctx.shadowColor = isLight ? 'rgba(194, 59, 46, 0.65)' : 'rgba(224, 112, 99, 0.9)';
-      ctx.shadowBlur = 16;
+      ctx.strokeStyle = light ? '#a83125' : '#e99a8d';
       ctx.stroke();
-      ctx.restore();
-
-      // 2. Vibrant logo-colored body cylinder (#E07063 / #C23B2E)
-      ctx.save();
-      ctx.beginPath();
-      ctx.arc(cx, cy, radius, startAngle, endAngle);
-      ctx.lineWidth = 3.2;
-      ctx.lineCap = 'round';
-      ctx.strokeStyle = isLight ? '#C23B2E' : '#E07063';
-      ctx.shadowColor = isLight ? 'rgba(194, 59, 46, 0.8)' : 'rgba(224, 112, 99, 0.95)';
-      ctx.shadowBlur = 9;
-      ctx.stroke();
-      ctx.restore();
-
-      // 3. Inner translucent gloss highlight
-      ctx.save();
-      const midHalf = arcLength * 0.32;
-      ctx.beginPath();
-      ctx.arc(cx, cy, radius, centerAngle - midHalf, centerAngle + midHalf);
-      ctx.lineWidth = 2.0;
-      ctx.lineCap = 'round';
-      ctx.strokeStyle = isLight ? 'rgba(255, 140, 130, 0.85)' : 'rgba(255, 195, 185, 0.9)';
-      ctx.shadowColor = isLight ? 'rgba(194, 59, 46, 0.45)' : 'rgba(255, 180, 170, 0.8)';
-      ctx.shadowBlur = 5;
-      ctx.stroke();
-      ctx.restore();
-
-      // 4. Specular reflection sheen (sharp pure white glassy reflection streak)
-      ctx.save();
-      const sheenHalf = arcLength * 0.16;
-      ctx.beginPath();
-      ctx.arc(cx, cy, radius, centerAngle - sheenHalf, centerAngle + sheenHalf);
-      ctx.lineWidth = 1.1;
-      ctx.lineCap = 'round';
-      ctx.strokeStyle = '#ffffff';
-      ctx.shadowColor = '#ffffff';
-      ctx.shadowBlur = 4;
-      ctx.stroke();
-      ctx.restore();
-
-      // 5. Specular refraction lens flare / bead at the center
-      const px = cx + radius * Math.cos(centerAngle);
-      const py = cy + radius * Math.sin(centerAngle);
-      ctx.save();
-      // Outer lens aura
-      const flareGrad = ctx.createRadialGradient(px, py, 0, px, py, 9);
-      flareGrad.addColorStop(0, 'rgba(255, 255, 255, 0.95)');
-      flareGrad.addColorStop(0.3, isLight ? 'rgba(194, 59, 46, 0.7)' : 'rgba(224, 112, 99, 0.75)');
-      flareGrad.addColorStop(0.7, isLight ? 'rgba(194, 59, 46, 0.2)' : 'rgba(224, 112, 99, 0.2)');
-      flareGrad.addColorStop(1, 'rgba(224, 112, 99, 0)');
-      ctx.fillStyle = flareGrad;
-      ctx.beginPath();
-      ctx.arc(px, py, 9, 0, Math.PI * 2);
-      ctx.fill();
-
-      // Sharp glassy bead center
-      const beadGrad = ctx.createRadialGradient(px - 0.7, py - 0.7, 0, px, py, 3.0);
-      beadGrad.addColorStop(0, '#ffffff');
-      beadGrad.addColorStop(0.4, '#FFE0DC');
-      beadGrad.addColorStop(0.85, isLight ? '#C23B2E' : '#E07063');
-      beadGrad.addColorStop(1, isLight ? 'rgba(194, 59, 46, 0.8)' : 'rgba(224, 112, 99, 0.8)');
-      ctx.fillStyle = beadGrad;
-      ctx.beginPath();
-      ctx.arc(px, py, 2.8, 0, Math.PI * 2);
-      ctx.fill();
       ctx.restore();
     }
 
@@ -1031,7 +961,7 @@
       if (!timestamp) timestamp = performance.now();
       const dt = Math.min((timestamp - lastTimestamp) / 1000, 0.1);
       lastTimestamp = timestamp;
-      orbitalTime += dt;
+      orbitalTime += reducedMotion.matches ? 0 : dt;
 
       currentScrollProgress += (targetScrollProgress - currentScrollProgress) * 0.09;
       mouseX += (targetMouseX - mouseX) * 0.05;
@@ -1045,6 +975,9 @@
       const R_start = height * 0.649;
       const R_end = height * 0.337;
       const t = currentScrollProgress;
+      scrollyTrack.style.setProperty('--orb-progress', t.toFixed(4));
+      scrollyTrack.style.setProperty('--orb-x', `${mouseX * 14}px`);
+      scrollyTrack.style.setProperty('--orb-y', `${mouseY * 14}px`);
 
       let R = R_start;
       let dist = R_start * 2.002;
@@ -1704,7 +1637,6 @@
 
     function easeInOutQuad(t) { return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2; }
     function easeInOutCubic(t) { return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; }
-    function easeInQuad(t) { return t * t; }
     function lerp(start, end, factor) { return start + (end - start) * factor; }
 
     function renderGalaxy() {
@@ -1721,25 +1653,15 @@
       }
 
       const p = scrollProgress;
-      let scaleOut = 0.1, scaleIn = 0.1, opacityCircles = 1;
-      let scrollRotOut = 0, scrollRotIn = 0, logoScale = 0.1;
-
-      if (p <= 0.5) {
-        const enterNorm = p / 0.5;
-        scaleOut = lerp(0.1, 1.0, easeInOutQuad(enterNorm));
-        scaleIn = lerp(0.1, 1.0, easeInOutCubic(enterNorm));
-        scrollRotOut = enterNorm * BASE_SPIN_OUT;
-        scrollRotIn = enterNorm * BASE_SPIN_IN;
-        logoScale = lerp(0.1, 1.0, easeInOutQuad(Math.min(1, enterNorm / 0.6)));
-      } else {
-        const exitNorm = (p - 0.5) / 0.5;
-        scaleOut = lerp(1.0, 2.5, easeInQuad(exitNorm));
-        scaleIn = lerp(1.0, 2.2, easeInQuad(exitNorm));
-        opacityCircles = lerp(1.0, 0.0, exitNorm);
-        scrollRotOut = BASE_SPIN_OUT + exitNorm * 60;
-        scrollRotIn = BASE_SPIN_IN - exitNorm * 60;
-        logoScale = 1.0;
-      }
+      // Expand into the full galaxy, then keep it visible until the sticky
+      // element naturally leaves the viewport. Never fade the entire stage out.
+      const enterNorm = Math.min(1, p / 0.65);
+      const scaleOut = lerp(0.65, 1.0, easeInOutQuad(enterNorm));
+      const scaleIn = lerp(0.65, 1.0, easeInOutCubic(enterNorm));
+      const opacityCircles = 1;
+      const scrollRotOut = p * BASE_SPIN_OUT;
+      const scrollRotIn = p * BASE_SPIN_IN;
+      const logoScale = lerp(0.7, 1.0, easeInOutQuad(enterNorm));
 
       if (circleOut) {
         circleOut.style.transform = `scale(${scaleOut.toFixed(4)})`;
@@ -1767,25 +1689,10 @@
       });
 
       if (content) {
-        let contentOpacity = 0, contentY = 30, contentScale = 0.95;
-        if (p < 0.22) {
-          contentOpacity = 0;
-          content.style.pointerEvents = 'none';
-        } else if (p >= 0.22 && p <= 0.75) {
-          const revealNorm = Math.min(1, (p - 0.22) / 0.2);
-          contentOpacity = easeInOutQuad(revealNorm);
-          contentY = (1 - contentOpacity) * 30;
-          contentScale = 0.95 + 0.05 * contentOpacity;
-          content.style.pointerEvents = 'auto';
-        } else {
-          const exitTextNorm = (p - 0.75) / 0.25;
-          contentOpacity = Math.max(0, 1 - exitTextNorm * 1.5);
-          contentY = -exitTextNorm * 60;
-          contentScale = 1.0;
-          content.style.pointerEvents = 'none';
-        }
-        content.style.opacity = contentOpacity.toFixed(3);
-        content.style.transform = `translate3d(0, ${contentY.toFixed(1)}px, 0) scale(${contentScale.toFixed(3)})`;
+        // Keep copy and CTA usable throughout the scroll and at the exit.
+        content.style.opacity = '1';
+        content.style.transform = 'none';
+        content.style.pointerEvents = 'auto';
       }
 
       // Magnetic pointer attraction
@@ -2055,456 +1962,5 @@
   })();
 
 
-  // ==========================================================================
-  // MODULE 14: THE RUNAWAY REALITY OF ENTERPRISE AI
-  // Sticky Stacking Cards with 3D Holographic Canvas & GSAP Controller (Section 10)
-  // ==========================================================================
-  (function initRunawayRealitySection() {
-    'use strict';
-
-    // Only pin the deck when every card fits below the fixed navigation.
-    function fitChallengeDeck() {
-      const deck = document.getElementById('cardsStack');
-      if (!deck) return;
-      const cards = Array.from(deck.querySelectorAll('[data-card]'));
-      const desktop = window.matchMedia('(min-width: 1001px) and (prefers-reduced-motion: no-preference)');
-      let frame = 0;
-      function measure() {
-        frame = 0;
-        const header = document.querySelector('.site-header');
-        const navBottom = header ? header.getBoundingClientRect().bottom : 68;
-        const top = Math.max(80, Math.ceil(navBottom + 12));
-        const strip = window.innerHeight <= 800 ? 6 : 12;
-        deck.style.setProperty('--cap-strip', `${strip}px`);
-        deck.style.setProperty('--cap-top', `${top}px`);
-        const fits = desktop.matches && cards.every((card, i) =>
-          card.offsetHeight + top + i * strip + 12 <= window.innerHeight);
-        if (deck.classList.contains('deck-fits-viewport') !== fits) {
-          deck.classList.toggle('deck-fits-viewport', fits);
-          if (typeof ScrollTrigger !== 'undefined') ScrollTrigger.refresh();
-        }
-      }
-      function queue() { if (!frame) frame = requestAnimationFrame(measure); }
-      if ('ResizeObserver' in window) {
-        const observer = new ResizeObserver(queue);
-        cards.forEach(card => observer.observe(card));
-      }
-      window.addEventListener('resize', queue, { passive: true });
-      if (document.fonts) document.fonts.ready.then(queue);
-      measure();
-    }
-
-    // 1. GSAP ScrollTrigger Card Stacking Kinetics
-    function initStackCards() {
-      if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
-        console.warn('GSAP or ScrollTrigger not loaded. Relying on native CSS sticky stacking.');
-        return;
-      }
-
-      gsap.registerPlugin(ScrollTrigger);
-
-      const cards = Array.from(document.querySelectorAll('[data-card]'));
-      if (!cards.length) return;
-
-      cards.forEach((card, i) => {
-        const nextCard = cards[i + 1];
-        if (!nextCard) return;
-
-        gsap.fromTo(
-          card,
-          {
-            rotate: 0,
-            scale: 1,
-            transformOrigin: 'center top'
-          },
-          {
-            rotate: i % 2 === 0 ? 0.8 : -0.8,
-            scale: 0.97,
-            ease: 'none',
-            scrollTrigger: {
-              trigger: nextCard,
-              start: 'top bottom',
-              end: 'top top',
-              scrub: true,
-              invalidateOnRefresh: true
-            }
-          }
-        );
-      });
-
-      // Click on card to scroll smoothly into view
-      cards.forEach((card, i) => {
-        card.addEventListener('click', (e) => {
-          if (e.target.closest('a') || e.target.closest('button')) return;
-          
-          if (!card.closest('.deck-fits-viewport')) return;
-          const deckStyle = getComputedStyle(card.parentElement);
-          const stripHeight = parseFloat(deckStyle.getPropertyValue('--cap-strip')) || 12;
-          const top = parseFloat(deckStyle.getPropertyValue('--cap-top')) || 80;
-          const targetScroll = card.getBoundingClientRect().top + scrollY - (top + i * stripHeight);
-          
-          window.scrollTo({
-            top: Math.max(0, targetScroll),
-            behavior: 'smooth'
-          });
-        });
-      });
-
-      ScrollTrigger.refresh();
-    }
-
-    // 2. 3D Holographic Stage Canvas (Wavy Particle Mesh & Floor Radar)
-    function initStageCanvases() {
-      const canvases = Array.from(document.querySelectorAll('.o-problem-stack-section [data-canvas]'));
-      if (!canvases.length) return;
-
-      const stages = canvases.map((canvas) => {
-        const ctx = canvas.getContext('2d');
-        return {
-          canvas,
-          ctx,
-          parent: canvas.parentElement,
-          width: 0,
-          height: 0,
-          time: Math.random() * 100,
-          isVisible: true
-        };
-      });
-
-      function resize() {
-        stages.forEach((st) => {
-          const rect = st.parent.getBoundingClientRect();
-          const dpr = Math.min(window.devicePixelRatio || 1, 2);
-          st.width = rect.width;
-          st.height = rect.height;
-          st.canvas.width = Math.floor(st.width * dpr);
-          st.canvas.height = Math.floor(st.height * dpr);
-          st.ctx.scale(dpr, dpr);
-        });
-      }
-
-      if ('IntersectionObserver' in window) {
-        const observer = new IntersectionObserver((entries) => {
-          entries.forEach((entry) => {
-            const matched = stages.find((s) => s.canvas === entry.target);
-            if (matched) matched.isVisible = entry.isIntersecting;
-          });
-        }, { threshold: 0.05 });
-
-        stages.forEach((st) => observer.observe(st.canvas));
-      }
-
-      function render() {
-        stages.forEach((st) => {
-          if (!st.isVisible || st.width <= 0 || st.height <= 0) return;
-
-          const { ctx, width, height } = st;
-          st.time += 0.018;
-
-          ctx.clearRect(0, 0, width, height);
-
-          const centerX = width / 2;
-          const floorY = height * 0.94;
-
-          // 1. Concentric Glowing Floor Pedestal Rings (Foreshortened at Base of Stage)
-          ctx.save();
-          ctx.globalCompositeOperation = 'screen';
-
-          ctx.beginPath();
-          ctx.ellipse(centerX, floorY, width * 0.46, height * 0.08, 0, 0, Math.PI * 2);
-          ctx.strokeStyle = 'rgba(255, 255, 255, 0.16)';
-          ctx.lineWidth = 1.4;
-          ctx.stroke();
-
-          ctx.beginPath();
-          ctx.ellipse(centerX, floorY, width * 0.34, height * 0.055, 0, 0, Math.PI * 2);
-          ctx.strokeStyle = 'rgba(255, 255, 255, 0.20)';
-          ctx.lineWidth = 1.2;
-          ctx.stroke();
-
-          ctx.beginPath();
-          ctx.setLineDash([4, 6]);
-          ctx.ellipse(centerX, floorY, width * 0.22, height * 0.035, 0, 0, Math.PI * 2);
-          ctx.strokeStyle = 'rgba(255, 255, 255, 0.24)';
-          ctx.stroke();
-          ctx.setLineDash([]);
-
-          const floorGrad = ctx.createRadialGradient(centerX, floorY, 10, centerX, floorY, width * 0.35);
-          floorGrad.addColorStop(0, 'rgba(255, 255, 255, 0.06)');
-          floorGrad.addColorStop(1, 'transparent');
-          ctx.fillStyle = floorGrad;
-          ctx.fill();
-
-          ctx.restore();
-
-          // 2. Undulating 3D Particle Wave Mesh (Red on Left, Green on Right)
-          ctx.save();
-          ctx.globalCompositeOperation = 'lighter';
-
-          const cols = 36;
-          const rows = 12;
-          const colSpacing = width / (cols - 1);
-          const rowSpacing = (height * 0.45) / rows;
-          const startY = height * 0.22;
-
-          for (let r = 0; r < rows; r++) {
-            for (let c = 0; c < cols; c++) {
-              const normX = c / (cols - 1);
-              const normY = r / (rows - 1);
-
-              const wave1 = Math.sin(normX * 5 + st.time + normY * 2) * 16;
-              const wave2 = Math.cos(normX * 8 - st.time * 0.8) * 10;
-              const py = startY + r * rowSpacing + wave1 + wave2;
-              const px = c * colSpacing;
-
-              let colorStr;
-              const distFromCenter = Math.abs(normX - 0.5) * 2;
-              const alpha = (0.2 + (1 - normY) * 0.45) * Math.min(distFromCenter + 0.3, 1);
-
-              if (normX < 0.48) {
-                colorStr = `rgba(255, 77, 77, ${alpha * 0.75})`;
-              } else if (normX > 0.52) {
-                colorStr = `rgba(0, 229, 163, ${alpha * 0.75})`;
-              } else {
-                colorStr = `rgba(255, 255, 255, ${alpha * 0.3})`;
-              }
-
-              const radius = 1.1 + Math.sin(normX * 3 + st.time) * 0.5;
-              ctx.beginPath();
-              ctx.arc(px, py, radius, 0, Math.PI * 2);
-              ctx.fillStyle = colorStr;
-              ctx.fill();
-            }
-          }
-
-          // 3. Ambient Floor Reflection Glows for Red & Green Tablets
-          const leftReflectX = width * 0.25;
-          const rightReflectX = width * 0.75;
-          const reflectY = height * 0.84;
-
-          const redReflect = ctx.createRadialGradient(leftReflectX, reflectY, 5, leftReflectX, reflectY, width * 0.22);
-          redReflect.addColorStop(0, 'rgba(255, 77, 77, 0.16)');
-          redReflect.addColorStop(1, 'transparent');
-          ctx.fillStyle = redReflect;
-          ctx.beginPath();
-          ctx.ellipse(leftReflectX, reflectY, width * 0.2, height * 0.08, 0, 0, Math.PI * 2);
-          ctx.fill();
-
-          const greenReflect = ctx.createRadialGradient(rightReflectX, reflectY, 5, rightReflectX, reflectY, width * 0.22);
-          greenReflect.addColorStop(0, 'rgba(0, 229, 163, 0.16)');
-          greenReflect.addColorStop(1, 'transparent');
-          ctx.fillStyle = greenReflect;
-          ctx.beginPath();
-          ctx.ellipse(rightReflectX, reflectY, width * 0.2, height * 0.08, 0, 0, Math.PI * 2);
-          ctx.fill();
-
-          ctx.restore();
-        });
-
-        requestAnimationFrame(render);
-      }
-
-      resize();
-      window.addEventListener('resize', resize, { passive: true });
-      requestAnimationFrame(render);
-    }
-
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', () => {
-        fitChallengeDeck();
-        initStackCards();
-        initStageCanvases();
-      });
-    } else {
-      fitChallengeDeck();
-      initStackCards();
-      initStageCanvases();
-    }
-  })();
-
-  // MODULE: ONEOPS GUARDRAILS STAGE ENGINE (.og)
-  // ==========================================================================
-  (function initGuardrailsEngine() {
-    function setupGuardrails() {
-      document.querySelectorAll('.og').forEach(root => {
-        if (root.__ogInitialized) return;
-        root.__ogInitialized = true;
-
-        const canvas = root.querySelector('canvas');
-        if (!canvas) return;
-        const ctx = canvas.getContext('2d');
-        const reduced = matchMedia('(prefers-reduced-motion: reduce)');
-        const fine = matchMedia('(pointer:fine) and (hover:hover)');
-        let w = 0, h = 0, raf = 0, active = false, start = 0, tiltEnabled = false, tiltTimer;
-
-        function draw(ms = 0) {
-          if (!ctx || !w || !h) return;
-          const t = reduced.matches ? 0 : ms * 0.00055;
-          ctx.clearRect(0, 0, w, h);
-          const step = w < 700 ? 10 : 13, rows = w < 700 ? 12 : 21;
-          for (let side = 0; side < 2; side++) {
-            const rgb = side ? '32,255,150' : '255,75,40';
-            for (let j = 0; j < rows; j++) {
-              const v = j / (rows - 1);
-              for (let k = 0; k <= Math.ceil(w * 0.56 / step); k++) {
-                const u = k * step / (w * 0.56);
-                if (u > 1) continue;
-                const x = side ? w - u * w * 0.56 : u * w * 0.56;
-                const envelope = Math.pow(1 - u, 1.8);
-                const wave = Math.sin(u * 8.3 + v * 2.2 + t * (side ? 1 : -1));
-                const base = side ? h * (0.47 + 0.18 * u) : h * (0.49 + 0.25 * u);
-                const y = base + wave * h * 0.12 * envelope + (v - 0.5) * h * 0.22 * envelope + Math.sin(u * 18 + t * 1.6 + j * 0.5) * 5;
-                const fade = Math.pow(1 - u, 1.45) * (0.2 + 0.8 * Math.pow(Math.abs(Math.sin(j * 0.42 + u * 9 + t)), 2));
-                const r = (0.55 + 1.1 * Math.pow(Math.abs(Math.sin(u * 13 + j * 0.8 + t)), 6)) * (w < 700 ? 0.72 : 1);
-                ctx.fillStyle = `rgba(${rgb},${fade * 0.84})`;
-                ctx.beginPath();
-                ctx.arc(x, y, r, 0, Math.PI * 2);
-                ctx.fill();
-              }
-            }
-            ctx.beginPath();
-            for (let k = 0; k <= 100; k++) {
-              const u = k / 100, x = side ? w - u * w * 0.56 : u * w * 0.56, env = Math.pow(1 - u, 1.8);
-              const y = (side ? h * (0.47 + 0.18 * u) : h * (0.49 + 0.25 * u)) + Math.sin(u * 8.3 + 1.1 + t * (side ? 1 : -1)) * h * 0.12 * env;
-              k ? ctx.lineTo(x, y) : ctx.moveTo(x, y);
-            }
-            const g = ctx.createLinearGradient(side ? w : 0, 0, w * 0.5, 0);
-            g.addColorStop(0, `rgba(${rgb},0.85)`);
-            g.addColorStop(0.45, `rgba(${rgb},0.5)`);
-            g.addColorStop(1, `rgba(${rgb},0)`);
-            ctx.strokeStyle = g;
-            ctx.lineWidth = 1.25;
-            ctx.shadowColor = `rgb(${rgb})`;
-            ctx.shadowBlur = 12;
-            ctx.stroke();
-            ctx.shadowBlur = 0;
-          }
-        }
-
-        function tick(now) {
-          if (!active || reduced.matches || document.hidden) {
-            raf = 0;
-            return;
-          }
-          draw(now - start);
-          raf = requestAnimationFrame(tick);
-        }
-
-        function playCanvas() {
-          if (!raf && active && !reduced.matches && !document.hidden) {
-            start = performance.now();
-            raf = requestAnimationFrame(tick);
-          }
-        }
-
-        function stopCanvas() {
-          if (raf) cancelAnimationFrame(raf);
-          raf = 0;
-        }
-
-        function resize() {
-          if (!ctx) return;
-          const rect = root.getBoundingClientRect();
-          w = rect.width;
-          h = rect.height;
-          const dpr = Math.min(window.devicePixelRatio || 1, 2);
-          canvas.width = Math.round(w * dpr);
-          canvas.height = Math.round(h * dpr);
-          ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-          draw(0);
-        }
-
-        if ('ResizeObserver' in window) {
-          new ResizeObserver(resize).observe(root);
-        } else {
-          window.addEventListener('resize', resize, { passive: true });
-        }
-        resize();
-
-        function reveal() {
-          root.classList.add('og-visible');
-          tiltEnabled = false;
-          clearTimeout(tiltTimer);
-          tiltTimer = setTimeout(() => tiltEnabled = true, 1800);
-        }
-
-        if (!reduced.matches && 'IntersectionObserver' in window) {
-          root.classList.add('og-ready');
-        }
-
-        if ('IntersectionObserver' in window) {
-          new IntersectionObserver(entries => {
-            entries.forEach(e => {
-              active = e.isIntersecting;
-              if (active) {
-                playCanvas();
-              } else {
-                stopCanvas();
-              }
-            });
-          }, { threshold: 0 }).observe(root);
-
-          const revealObserver = new IntersectionObserver(entries => {
-            if (entries.some(e => e.isIntersecting)) {
-              reveal();
-              revealObserver.disconnect();
-            }
-          }, { threshold: 0.12 });
-          revealObserver.observe(root);
-        } else {
-          active = true;
-          reveal();
-          playCanvas();
-        }
-
-        const replayBtn = root.querySelector('.og-replay');
-        if (replayBtn) {
-          replayBtn.addEventListener('click', () => {
-            if (reduced.matches) return;
-            root.classList.add('og-ready');
-            root.classList.remove('og-visible');
-            root.querySelectorAll('.og-panel').forEach(p => {
-              p.style.setProperty('--rx', '0deg');
-              p.style.setProperty('--ry', '0deg');
-            });
-            void root.offsetWidth;
-            reveal();
-          });
-        }
-
-        root.querySelectorAll('.og-panel').forEach(panel => {
-          panel.addEventListener('pointermove', e => {
-            if (!fine.matches || reduced.matches || !tiltEnabled) return;
-            const r = panel.getBoundingClientRect();
-            const x = (e.clientX - r.left) / r.width - 0.5;
-            const y = (e.clientY - r.top) / r.height - 0.5;
-            panel.style.setProperty('--rx', `${-y * 7}deg`);
-            panel.style.setProperty('--ry', `${x * 9}deg`);
-          });
-          panel.addEventListener('pointerleave', () => {
-            panel.style.setProperty('--rx', '0deg');
-            panel.style.setProperty('--ry', '0deg');
-          });
-        });
-
-        document.addEventListener('visibilitychange', () => document.hidden ? stopCanvas() : playCanvas());
-        reduced.addEventListener('change', () => {
-          if (reduced.matches) {
-            stopCanvas();
-            draw(0);
-            reveal();
-          } else {
-            playCanvas();
-          }
-        });
-      });
-    }
-
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', setupGuardrails);
-    } else {
-      setupGuardrails();
-    }
-  })();
 
 })();
